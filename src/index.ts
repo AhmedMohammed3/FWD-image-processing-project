@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 
-import routes from './routes/routes';
+import routes from './routes/images';
 
 const PORT = 3000;
 

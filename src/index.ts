@@ -14,6 +14,8 @@ app.use('/api/images', routes);
 app.use('/images', express.static('./src/assets/'));
 
 // start the server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
+
+export default server;

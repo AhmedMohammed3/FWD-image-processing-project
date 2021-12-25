@@ -1,16 +1,18 @@
 import fs from 'fs';
 import path from 'path';
+
 import sharp from 'sharp';
+import { Request, Response } from 'express';
 
 // funtion to check if the image exists
-export const isImageExist = (imagePath) => {
+export const isImageExist = (imagePath: string) => {
     if (fs.existsSync(imagePath)) {
         return true;
     }
     return false;
 };
-
-export const getResizedImage = (req, res) => {
+// GET /images/?filename=""&width=0&height=0
+export const getResizedImage = (req: Request, res: Response) => {
     // get the image
     const filename = req.query.filename;
     if (!filename) {
@@ -23,7 +25,7 @@ export const getResizedImage = (req, res) => {
         res.status(400).send('Width and height are required');
         return;
     }
-    const imagePath = path.join(__dirname, `../../assets/full/${filename}.jpg`);
+    const imagePath = path.join(__dirname, `../../assets/full/${filename}`);
     const targetPath = path.join(
         __dirname,
         `../../assets/thumb/${filename}-${width}*${height}.jpg`,

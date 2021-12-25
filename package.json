@@ -5,7 +5,7 @@
     "main": "build/index.js",
     "typings": "build/index.js",
     "scripts": {
-        "test": "jasmin spec/**/*",
+        "test": "jasmine spec/**/*",
         "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
         "build": "npx tsc",
         "start": "node ./build/index.js",

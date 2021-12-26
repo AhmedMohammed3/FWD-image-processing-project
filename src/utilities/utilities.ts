@@ -23,7 +23,7 @@ export const resizeImage = async (
         __dirname,
         `../../assets/thumb/${
             path.parse(imagePath).name
-        }-${width}*${height}.jpg`,
+        }-${width}x${height}.jpg`,
     );
 
     if (!isImageExist(imagePath)) {

@@ -19,11 +19,11 @@ Open your terminal and run the following command<br/>
 
 ## Usage
 
-Open your terminal in the cloned folder and run the following set of commands:<br/>
-
-1. `npm i`
-2. `npm run build`
-2. `npm start`
+1. Open your terminal in the cloned folder and run the following set of commands:<br/>
+   1. `npm i`
+   2. `npm run build`
+   3. `npm start`
+2. Open http://localhost:3000/api/images?filename=fjord.jpg&width=200&height=200
 
 ## Contribute
 

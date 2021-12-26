@@ -23,7 +23,7 @@ Open your terminal and run the following command<br/>
    1. `npm i`
    2. `npm run build`
    3. `npm start`
-2. Open http://localhost:3000/api/images?filename=fjord.jpg&width=200&height=200
+2. Open http://localhost:3001/api/images?filename=fjord.jpg&width=200&height=200
 
 ## Contribute
 

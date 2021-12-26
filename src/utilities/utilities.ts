@@ -23,7 +23,7 @@ export const resizeImage = async (
         __dirname,
         `../../assets/thumb/${
             path.parse(imagePath).name
-        }-${width}*${height}.jpg`,
+        }-${width}X${height}.jpg`,
     );
 
     if (!isImageExist(imagePath)) {
@@ -39,12 +39,15 @@ export const resizeImage = async (
     makeThumbDirIfNotExist();
 
     const inStream = fs.createReadStream(imagePath);
-
-    const outStream = fs.createWriteStream(targetPath);
+    console.log('targetPath:', targetPath);
+    const outStream = fs.createWriteStream(targetPath, { flags: 'w' });
     outStream.on('error', (err): void => {
         console.log(err);
         errcb('Server Error', 500);
         return;
+    });
+    outStream.on('data', (data): void => {
+        console.log('data:', data);
     });
     outStream.on('close', (): void => {
         successcb(targetPath);
@@ -52,6 +55,7 @@ export const resizeImage = async (
     });
     const resizedImage = await sharp().resize({ width, height });
     inStream.pipe(resizedImage).pipe(outStream);
+    console.log('Reached');
 };
 
 export const makeThumbDirIfNotExist = (): void => {

@@ -1,8 +1,4 @@
-import {
-    isImageExist,
-    makeThumbDirIfNotExist,
-    resizeImage,
-} from './../utilities/utilities';
+import { isImageExist, resizeImage } from './../utilities/utilities';
 import path from 'path';
 import fs from 'fs';
 
@@ -21,21 +17,10 @@ describe('isImageExist', (): void => {
     });
 });
 
-// create a test for makeThumbDirIfNotExist
-describe('makeThumbDirIfNotExist', (): void => {
-    it('should create thumb dir if it does not exist', (): void => {
-        const thumbDir = path.join(__dirname, '../../assets/thumb');
-        fs.rmSync(thumbDir, { recursive: true });
-        expect(fs.existsSync(thumbDir)).toBe(false);
-        makeThumbDirIfNotExist();
-        expect(fs.existsSync(thumbDir)).toBe(true);
-    });
-});
-
 // create a test for resizeImage
 describe('resizeImage', (): void => {
     afterAll((): void => {
-        fs.rmSync(path.join(__dirname, '../../assets/thumb'), {
+        fs.rmdirSync(path.join(__dirname, '../../assets/thumb'), {
             recursive: true,
         });
     });

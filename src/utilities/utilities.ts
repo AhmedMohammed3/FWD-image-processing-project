@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import path from 'path';
 
 // funtion to check if the image exists
-export const isImageExist = (imagePath: string) => {
+export const isImageExist = (imagePath: string): boolean => {
     if (fs.existsSync(imagePath)) {
         return true;
     }
@@ -11,13 +11,13 @@ export const isImageExist = (imagePath: string) => {
     return false;
 };
 
-export const resizeImage = (
+export const resizeImage = async (
     filename: string,
     width: number,
     height: number,
     errcb,
     successcb,
-) => {
+): Promise<void> => {
     const imagePath = path.join(__dirname, `../../assets/full/${filename}`);
     const targetPath = path.join(
         __dirname,
@@ -32,7 +32,6 @@ export const resizeImage = (
     }
 
     if (isImageExist(targetPath)) {
-        console.log('Sent Existing Image');
         successcb(targetPath);
         return;
     }
@@ -42,21 +41,20 @@ export const resizeImage = (
     const inStream = fs.createReadStream(imagePath);
 
     const outStream = fs.createWriteStream(targetPath);
-    outStream.on('error', (err) => {
+    outStream.on('error', (err): void => {
         console.log(err);
         errcb('Server Error', 500);
         return;
     });
-    outStream.on('close', () => {
-        console.log('resized successfuly');
+    outStream.on('close', (): void => {
         successcb(targetPath);
         return;
     });
-    const resizedImage = sharp().resize({ width, height });
+    const resizedImage = await sharp().resize({ width, height });
     inStream.pipe(resizedImage).pipe(outStream);
 };
 
-export const makeThumbDirIfNotExist = () => {
+export const makeThumbDirIfNotExist = (): void => {
     const thumbDir = path.join(__dirname, '../../assets/thumb');
     if (!fs.existsSync(thumbDir)) {
         fs.mkdirSync(thumbDir);
